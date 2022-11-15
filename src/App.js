@@ -20,6 +20,7 @@ function reducer(state, action) {
         }
       }
       if (action.payload.digit === "0" && state.currentInput === "0") return state
+      if (action.payload.digit === "." && state.currentInput == null) return state
       if (action.payload.digit === "." && state.currentInput.includes(".")) return state
       return {
         ...state,
@@ -107,7 +108,13 @@ function evaluate({currentInput, previousInput, operation}){
   return compuation.toString()
 }
 
-
+const INTEGER_FORMATTER = new Intl.NumberFormat("en-us", {maximumFractionDigits: 0,})
+function formatInput(input){
+  if (input == null) return
+  const [integer, decimal] = input.split('.')
+  if (decimal == null) return INTEGER_FORMATTER.format(integer)
+  return `${INTEGER_FORMATTER.format(integer)}.${decimal}`
+}
 function App() {
   const [state, dispatch] = useReducer(reducer, {})
   
@@ -116,9 +123,9 @@ function App() {
       <div className="calculator">
         <div className="display">
           <div className="previous-input">
-            {state.previousInput} {state.operation}
+            {formatInput(state.previousInput)} {state.operation}
           </div>
-          <div className="input">{state.currentInput}</div>
+          <div className="input">{formatInput(state.currentInput)}</div>
         </div>
         <button className="bigButton" onClick={()=>dispatch({type: ACTIONS.CLEAR })}>Clear</button>
         <button onClick={()=>dispatch({type: ACTIONS.DELETE_DIGIT })}>DEL</button>
