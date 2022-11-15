@@ -146,6 +146,9 @@ function App() {
         <DigitButton digit="0" dispatch={dispatch}/>
         <button className="bigButton" onClick={()=>dispatch({type: ACTIONS.EVALUATE })}>=</button>
       </div>
+      <div className="source">
+        <a href="https://github.com/KristianCorrea/react-calculator"><img className="git" src={require('./git.png')} alt="source code"/></a>
+      </div>
     </div>
   );
 }
