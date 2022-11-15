@@ -145,7 +145,6 @@ function App() {
         <DigitButton digit="." dispatch={dispatch}/>
         <DigitButton digit="0" dispatch={dispatch}/>
         <button className="bigButton" onClick={()=>dispatch({type: ACTIONS.EVALUATE })}>=</button>
-        <button className="matti pics feet*L">secre bujton</button>
       </div>
     </div>
   );
